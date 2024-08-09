@@ -10,7 +10,7 @@ const Apply = () => {
   const [handle, setHandle] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(""); 
   const [submitted, setSubmitted] = useState(false);
  
   const handleCategoryChange = (e) => {
@@ -21,7 +21,32 @@ const Apply = () => {
     e.preventDefault();
     if (!category) return toast.error("Add a category");
     // backend part
-    toast("You are registered Successfully");
+    fetch('http://localhost:8080/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        handle,
+        email,
+        password,
+        category
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success') {
+          toast("You are registered successfully");
+          localStorage.setItem('LinktreeToken', data.token);
+          setSubmitted(true);
+          router.push('/login');
+        } else {
+          toast(data.message);
+        }
+      })
+      .catch(err => {
+        toast("Try a different username");
+      })
   };
   return (
     <>
