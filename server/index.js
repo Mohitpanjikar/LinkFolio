@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 const { registerUser, loginUser } = require('./controllers/auth');
+const {dashBoardData} = require('./controllers/dashboard');
 require('dotenv').config();
 
 app.use(cors());
@@ -24,6 +25,8 @@ app.get('/', (req, res) => {
 // Changed one of the routes from '/api/register' to '/api/login'
 app.post('/api/register', registerUser);
 app.post('/api/login', loginUser);
+
+app.post('/data/dashboard',dashBoardData);
 
 const port = process.env.PORT || 8080;
 
