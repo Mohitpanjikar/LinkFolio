@@ -1,12 +1,13 @@
 {
-  "name": "site",
+  "name": "linkfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export"
   },
   "dependencies": {
     "eslint": "8.37.0",
@@ -24,5 +25,8 @@
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.3.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

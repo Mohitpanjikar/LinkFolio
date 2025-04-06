@@ -15,19 +15,28 @@ const {
 const {getUserData,getUserSocials} = require('./controllers/getUserData');
 require('dotenv').config();
 
-app.use(cors());
+// Updated CORS configuration to work with deployed frontend
+app.use(cors({
+  origin: process.env.CORS_ORIGIN ? 
+    process.env.CORS_ORIGIN.split(',') : 
+    ['http://localhost:3000', 'https://linkfolio.vercel.app'],
+  credentials: true
+}));
+
 app.use(express.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/linkTree-9')
+// Updated MongoDB connection to use environment variable for deployment flexibility
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/linkTree-9';
+mongoose.connect(MONGODB_URI)
   .then(() => {
     console.log('MongoDB Connected');
   })
   .catch(err => {
-    console.error(err);
+    console.error('MongoDB connection error:', err);
   });
 
 app.get('/', (req, res) => {
-  res.send("Hello");
+  res.send("LinkFolio API is running");
 });
 
 // Auth routes
