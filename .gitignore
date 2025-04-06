@@ -1,0 +1,72 @@
+# dependencies
+node_modules
+**/node_modules
+.pnp
+.pnp.js
+
+# build outputs
+**/.next/
+**/out/
+**/build/
+**/dist/
+
+# environment variables and configuration
+**/.env
+**/.env.*
+!**/.env.example
+
+# logs
+**/logs
+**/*.log
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/.pnpm-debug.log*
+
+# confidential files
+**/config/secrets.js
+**/config/secrets.json
+**/*config.json
+**/credentials.json
+**/*.key
+**/*.pem
+**/*.crt
+**/token.json
+**/*credentials*
+**/*.p12
+**/*private*
+**/uploads/*
+!**/uploads/.gitkeep
+
+# database
+**/data/
+**/db/
+**/*.sqlite
+**/*.db
+
+# IDE and editor files
+.idea/
+.vscode/
+**/*.swp
+**/*.swo
+**/*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# testing
+/coverage
+**/.nyc_output
+
+# misc
+*.pem
+**/tmp/
+**/.vercel
+**/.turbo
+**/.cache/ 

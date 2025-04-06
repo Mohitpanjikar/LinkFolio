@@ -1,6 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --secondary-color: #f43f5e;
+  --accent-color: #06b6d4;
+  --bg-light: #f9fafb;
+  --text-dark: #111827;
+  --text-light: #6b7280;
+  --border-color: #e5e7eb;
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
 
 * {
   box-sizing: border-box;
@@ -13,45 +27,97 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: Montserrat, Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: var(--text-dark);
+  background-color: var(--bg-light);
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 a {
-  font-family: Poppins, Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: inherit;
   text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+p {
+  line-height: 1.6;
+}
+
+button, 
+.button {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+input, textarea, select {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 ::-webkit-scrollbar {
-  width: 8px; /* Set width of scrollbar */
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Set background color of scrollbar track */
+  background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888; /* Set color of scrollbar thumb */
-  border-radius: 2px; /* Round the corners of the thumb */
+  background: #888;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #757575; /* Set color of thumb on hover */
+  background: #757575;
 }
 
-img{
+img {
   user-select: none;
   -webkit-user-drag: none;
+}
+
+/* Layout components */
+.card {
+  @apply bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden;
+}
+
+.container-custom {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.btn-primary {
+  @apply bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition-colors;
+}
+
+.btn-secondary {
+  @apply bg-white hover:bg-gray-50 text-indigo-600 font-medium py-2 px-4 rounded-lg border border-indigo-600 transition-colors;
+}
+
+.btn-accent {
+  @apply bg-pink-500 hover:bg-pink-600 text-white font-medium py-2 px-4 rounded-lg transition-colors;
+}
+
+.input-field {
+  @apply border border-gray-300 rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500;
+}
+
+.tab-active {
+  @apply border-indigo-600 text-indigo-600 font-medium;
+}
+
+.tab-inactive {
+  @apply border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300;
+}
+
+/* For mobile menu */
+.mobile-menu-open {
+  overflow: hidden;
 }
 
 /* @media (prefers-color-scheme: dark) {

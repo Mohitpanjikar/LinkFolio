@@ -1,21 +1,48 @@
 .background {
     position: relative;
-    background : url(../public/images/background-desktop.jpg)
+    background-color: #000;
+    overflow: hidden;
 }
 
-.background::before{
+.background::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width:100%;
-    height:100%;
-    background-color: rgba(0,0,0,0.8);
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(135deg, transparent 20px, rgba(255, 255, 255, 0.03) 0) 0 0,
+        linear-gradient(225deg, transparent 20px, rgba(255, 255, 255, 0.03) 0) 0 0,
+        linear-gradient(315deg, transparent 20px, rgba(255, 255, 255, 0.03) 0) 0 0,
+        linear-gradient(45deg, transparent 20px, rgba(255, 255, 255, 0.03) 0) 0 0;
+    background-size: 40px 40px;
+    z-index: 1;
 }
 
-@media screen and (max-width:768px){
+.background::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 70%), 
+                radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+    z-index: 2;
+}
+
+/* Tablet screens */
+@media screen and (max-width: 1024px) {
     .background {
-        background : url(../public/images/background-mobile.jpg)
+        background-attachment: scroll;
+    }
+}
+
+/* Mobile screens */
+@media screen and (max-width: 768px) {
+    .background::before {
+        background-size: 30px 30px;
     }
 }
 

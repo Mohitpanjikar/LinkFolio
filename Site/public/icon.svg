@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="128" fill="#000000" />
+  
+  <!-- "L" character stylized -->
+  <path d="M144 144v160h80v64h144v-64h-80V144h-144z" fill="white" />
+  
+  <!-- Connection dots -->
+  <circle cx="256" cy="256" r="16" fill="white" />
+  <circle cx="180" cy="180" r="12" fill="white" />
+  <circle cx="332" cy="332" r="12" fill="white" />
+</svg> 

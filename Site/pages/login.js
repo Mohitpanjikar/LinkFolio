@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import styles from "../styles/apply.module.css";
-import Footer from "../components/Footer";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
-const Apply = () => {
+const Login = () => {
   const router = useRouter();
-  const [handle, setHandle] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");  
-  const [category, setCategory] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const handleLogin = (e) => {
@@ -47,60 +45,87 @@ const Apply = () => {
   }
   return (
     <>
+      <Head>
+        <title>Login to LinkFolio - Access Your Dashboard</title>
+        <meta name="description" content="Login to your LinkFolio account to manage your links, profile, and social media connections." />
+      </Head>
       <section
         className={
           styles.background + " min-h-screen flex justify-center items-center"
         }
       >
-        <div className="main">
-          <div className="content bg-white border-2 px-4 py-8 rounded-2xl shadow-lg">
-            <h1 className="text-2xl font-bold text-center">
-            You are among top 1% creators
-            </h1>
-            <p className="text-center">Access you Dashboard</p>
-            <p className="text-center py-5 font-bold text-gray-500">
-              Start building your portfolio
-            </p>
+        <div className="relative z-10 w-full max-w-md mx-auto px-4 py-10 sm:px-0">
+          <div className="card p-6 sm:p-8 bg-white/95 backdrop-blur-sm border-0 shadow-xl rounded-xl">
+            <div className="text-center mb-6">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-heading">
+                Welcome Back
+              </h1>
+              <p className="text-gray-600 mt-2">Access your LinkFolio dashboard</p>
+              <div className="h-1 w-16 bg-black mx-auto my-4"></div>
+            </div>
+            
             <form
               onSubmit={handleLogin}
-              className="flex flex-col gap-4 text-lg mt-5"
+              className="space-y-4"
             >
-              <span className="flex flex-row shadow-md border-2 px-3 py-2 rounded-md focus:outline-none">
-              <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="px-3 py-2 rounded-md focus:outline-none"
-                type="email"
-                placeholder="Enter your email"
-                required
-              />
-              </span>
-              <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="shadow-md border-2 px-3 py-2 rounded-md focus:outline-none"
-                type="password"
-                placeholder="Set a password"
-                required
-              />
-              <input
-                className="bg-indigo-600 text-white py-2 rounded-lg cursor-pointer"
+              <div className="space-y-4">
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                  <span className="flex flex-row items-center shadow-md border border-gray-200 px-3 py-2 rounded-lg focus-within:border-gray-400 focus-within:ring-2 focus-within:ring-gray-100 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <input
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="focus:outline-none w-full bg-transparent"
+                      type="email"
+                      placeholder="Enter your email"
+                      required
+                    />
+                  </span>
+                </div>
+
+                <div>
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                  <span className="flex flex-row items-center shadow-md border border-gray-200 px-3 py-2 rounded-lg focus-within:border-gray-400 focus-within:ring-2 focus-within:ring-gray-100 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    <input
+                      id="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="focus:outline-none w-full bg-transparent"
+                      type="password"
+                      placeholder="Enter your password"
+                      required
+                    />
+                  </span>
+                </div>
+              </div>
+              
+              <button
+                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-6"
                 type="submit"
-                value="Login"
-              />
+              >
+                Login
+              </button>
             </form>
           </div>
-          <h4 className="text-center text-white pt-3">
-           New here ?{" "}
-            <Link className="font-bold text-red-400" href="/apply">
-            Apply 
-            </Link>
-          </h4>
+          <div className="text-center text-white pt-5">
+            <p className="drop-shadow-md">
+              Don't have an account?{" "}
+              <Link className="font-bold text-white hover:text-gray-200 transition-colors" href="/apply">
+                Apply Now
+              </Link>
+            </p>
+          </div>
         </div>
       </section>
-      <Footer />
     </>
   );
 };
 
-export default Apply;
+export default Login;

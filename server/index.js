@@ -4,7 +4,14 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 const { registerUser, loginUser } = require('./controllers/auth');
-const {dashBoardData} = require('./controllers/dashboard');
+const {
+  dashBoardData,
+  updateProfile,
+  addLink,
+  updateLink,
+  deleteLink,
+  updateSocialMedia
+} = require('./controllers/dashboard');
 const {getUserData,getUserSocials} = require('./controllers/getUserData');
 require('dotenv').config();
 
@@ -23,14 +30,21 @@ app.get('/', (req, res) => {
   res.send("Hello");
 });
 
-// Changed one of the routes from '/api/register' to '/api/login'
+// Auth routes
 app.post('/api/register', registerUser);
 app.post('/api/login', loginUser);
 
-app.post('/data/dashboard',dashBoardData);
+// Dashboard routes
+app.post('/data/dashboard', dashBoardData);
+app.post('/api/update-profile', updateProfile);
+app.post('/api/add-link', addLink);
+app.post('/api/update-link', updateLink);
+app.post('/api/delete-link', deleteLink);
+app.post('/api/update-social-media', updateSocialMedia);
 
-app.get('/get/:handle',getUserData);
-app.get('/get/:socials/:handle',getUserSocials);
+// Public profile routes
+app.get('/get/:handle', getUserData);
+app.get('/get/socials/:handle', getUserSocials);
 
 const port = process.env.PORT || 8080;
 

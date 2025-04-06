@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react'
 
-const SocialTree = ({Social}) => {
+const SocialTree = ({ social }) => {
     const {
         facebook,
         twitter,
@@ -13,29 +13,41 @@ const SocialTree = ({Social}) => {
   return (
      <>
         <div className="social flex flex-row justify-center my-4">
-        <Link className = "bg-white rounded-full p-2 hover:bg-zinc-100 transition-all duration-500 hover:scale-110  border-gray-700 mx-1 select-none" href={`https://facebook.com/${facebook}`} target="_blank" rel="noopener noreferrer">
-            <img className = 'w-6' src="/svg/facebook.svg" alt="Facebook" />
-        </Link>
+        {facebook && (
+          <Link className="bg-white rounded-full p-2 hover:bg-zinc-100 transition-all duration-500 hover:scale-110 border-gray-700 mx-1 select-none" href={`https://facebook.com/${facebook}`} target="_blank" rel="noopener noreferrer">
+              <img className="w-6" src="/svg/facebook.svg" alt="Facebook" />
+          </Link>
+        )}
 
-        <Link className = "bg-white rounded-full p-2 hover:bg-zinc-100 transition-all duration-500 hover:scale-110  border-gray-700 mx-1 select-none" href={`https://instagram.com/${instagram}`} target="_blank" rel="noopener noreferrer">
-            <img className = 'w-6' src="/svg/instagram.svg" alt="instagram" />
-        </Link>
+        {instagram && (
+          <Link className="bg-white rounded-full p-2 hover:bg-zinc-100 transition-all duration-500 hover:scale-110 border-gray-700 mx-1 select-none" href={`https://instagram.com/${instagram}`} target="_blank" rel="noopener noreferrer">
+              <img className="w-6" src="/svg/instagram.svg" alt="Instagram" />
+          </Link>
+        )}
 
-        <Link className = "bg-white rounded-full p-2 hover:bg-zinc-100 transition-all duration-500 hover:scale-110  border-gray-700 mx-1 select-none" href={`https://youtube.com/${youtube}`} target="_blank" rel="noopener noreferrer">
-            <img className = 'w-6' src="/svg/youtueb.svg" alt="youtueb" />
-        </Link>
+        {youtube && (
+          <Link className="bg-white rounded-full p-2 hover:bg-zinc-100 transition-all duration-500 hover:scale-110 border-gray-700 mx-1 select-none" href={`https://youtube.com/${youtube}`} target="_blank" rel="noopener noreferrer">
+              <img className="w-6" src="/svg/youtube.svg" alt="YouTube" />
+          </Link>
+        )}
 
-        <Link className = "bg-white rounded-full p-2 hover:bg-zinc-100 transition-all duration-500 hover:scale-110  border-gray-700 mx-1 select-none" href={`https://github.com/${github}`} target="_blank" rel="noopener noreferrer">
-            <img className = 'w-6' src="/svg/github.svg" alt="github" />
-        </Link>
+        {github && (
+          <Link className="bg-white rounded-full p-2 hover:bg-zinc-100 transition-all duration-500 hover:scale-110 border-gray-700 mx-1 select-none" href={`https://github.com/${github}`} target="_blank" rel="noopener noreferrer">
+              <img className="w-6" src="/svg/github.svg" alt="GitHub" />
+          </Link>
+        )}
 
-        <Link className = "bg-white rounded-full p-2 hover:bg-zinc-100 transition-all duration-500 hover:scale-110  border-gray-700 mx-1 select-none" href={`https://linkedin.com/${linkedin}`} target="_blank" rel="noopener noreferrer">
-            <img className = 'w-6' src="/svg/ln.svg" alt="linkedin" />
-        </Link>
+        {linkedin && (
+          <Link className="bg-white rounded-full p-2 hover:bg-zinc-100 transition-all duration-500 hover:scale-110 border-gray-700 mx-1 select-none" href={`https://linkedin.com/in/${linkedin}`} target="_blank" rel="noopener noreferrer">
+              <img className="w-6" src="/svg/linkedin.svg" alt="LinkedIn" />
+          </Link>
+        )}
 
-        <Link className = "bg-white rounded-full p-2 hover:bg-zinc-100 transition-all duration-500 hover:scale-110  border-gray-700 mx-1 select-none" href={`https://twitter.com/${twitter}`} target="_blank" rel="noopener noreferrer">
-            <img className = 'w-6' src="/svg/twitter.svg" alt="twitter" />
-        </Link>
+        {twitter && (
+          <Link className="bg-white rounded-full p-2 hover:bg-zinc-100 transition-all duration-500 hover:scale-110 border-gray-700 mx-1 select-none" href={`https://twitter.com/${twitter}`} target="_blank" rel="noopener noreferrer">
+              <img className="w-6" src="/svg/twitter.svg" alt="Twitter" />
+          </Link>
+        )}
 
         </div>
      </>

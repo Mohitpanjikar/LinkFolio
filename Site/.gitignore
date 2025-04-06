@@ -28,7 +28,40 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
-.env*.local
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
 
 # vercel
 .vercel
+
+# confidential files
+**/config/secrets.js
+**/config/secrets.json
+**/*config.json
+**/credentials.json
+**/*.key
+**/*.pem
+**/*.crt
+**/token.json
+**/*credentials*
+
+# logs
+logs
+*.log
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Build artifacts
+dist/
+build/
