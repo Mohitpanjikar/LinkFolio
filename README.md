@@ -17,28 +17,19 @@ Welcome to **LinkFolio** – A modern, minimalist link-in-bio solution built wit
 
 ## 📸 Screenshots
 
-<table>
-  <tr>
-    <td width="50%">
-      <img src="Demo/Login.png" alt="Login Page" width="100%"/>
-      <p align="center">Login Page</p>
-    </td>
-    <td width="50%">
-      <img src="Demo/Features.png" alt="Features Page" width="100%"/>
-      <p align="center">Features Page</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <img src="Demo/Dashboard.png" alt="User Dashboard" width="100%"/>
-      <p align="center">User Dashboard</p>
-    </td>
-    <td width="50%">
-      <img src="Demo/UserProfile.png" alt="User Profile" width="100%"/>
-      <p align="center">User Profile Page</p>
-    </td>
-  </tr>
-</table>
+<div align="center">
+  <img src="Demo/Login.png" alt="Login Page" width="700"/>
+  <p><em>Login Page</em></p>
+  
+  <img src="Demo/Features.png" alt="Features Page" width="700"/>
+  <p><em>Features Page</em></p>
+  
+  <img src="Demo/Dashboard.png" alt="User Dashboard" width="700"/>
+  <p><em>User Dashboard</em></p>
+  
+  <img src="Demo/UserProfile.png" alt="User Profile" width="700"/>
+  <p><em>User Profile Page</em></p>
+</div>
 
 ## 🚀 Features
 
