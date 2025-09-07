@@ -4,6 +4,9 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 // Helper function to construct full API URLs
 export const apiEndpoint = (path) => `${API_URL}${path}`;
 
+// Export the base URL for direct use
+export const getApiUrl = () => API_URL;
+
 // Common API endpoints
 export const API_ENDPOINTS = {
   // Auth endpoints

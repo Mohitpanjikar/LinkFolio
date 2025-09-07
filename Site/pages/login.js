@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { API_ENDPOINTS } from "../utils/apiConfig";
 
 const Login = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const Login = () => {
     e.preventDefault();
      
     // Backend call for login
-    fetch('http://localhost:8080/api/login', {
+    fetch(API_ENDPOINTS.login, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

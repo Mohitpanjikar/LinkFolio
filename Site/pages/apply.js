@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { API_ENDPOINTS } from "../utils/apiConfig";
  
 const Apply = () => {
   const router = useRouter();
@@ -20,15 +21,19 @@ const Apply = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     if (!category) return toast.error("Add a category");
+    if (!handle.trim()) return toast.error("Username is required");
+    if (handle.length < 3) return toast.error("Username must be at least 3 characters");
+    if (!/^[a-zA-Z0-9_]+$/.test(handle)) return toast.error("Username can only contain letters, numbers, and underscores");
+    
     // backend part
-    fetch('http://localhost:8080/api/register', {
+    fetch(API_ENDPOINTS.register, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        handle,
-        email,
+        handle: handle.toLowerCase().trim(), // Normalize handle
+        email: email.toLowerCase().trim(),
         password,
         category
       })
@@ -36,17 +41,24 @@ const Apply = () => {
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
-          toast("You are registered successfully");
+          toast.success("You are registered successfully");
           localStorage.setItem('LinkTreeToken', data.token);
           setSubmitted(true);
           router.push('/login');
         } else {
-          toast(data.message);
+          // Better error handling
+          if (data.message && data.message.includes('handle')) {
+            toast.error("Username already taken. Try a different one.");
+          } else if (data.message && data.message.includes('email')) {
+            toast.error("Email already registered. Try logging in instead.");
+          } else {
+            toast.error(data.message || "Registration failed. Please try again.");
+          }
         }
       })
       .catch(err => {
         console.error('Registration error:', err);
-        toast("Try a different username");
+        toast.error("Network error. Please check your connection and try again.");
       })
   };
   return (

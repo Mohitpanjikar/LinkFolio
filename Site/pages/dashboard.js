@@ -59,7 +59,8 @@ const Dashboard = () => {
   
   const fetchLinks = async (handle) => {
     try {
-      const response = await fetch(`http://localhost:8080/get/${handle}`);
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+      const response = await fetch(`${apiUrl}/get/${handle}`);
       const data = await response.json();
       
       if (data.status === 'success') {
@@ -72,7 +73,8 @@ const Dashboard = () => {
   
   const fetchSocialMedia = async (handle) => {
     try {
-      const response = await fetch(`http://localhost:8080/get/socials/${handle}`);
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+      const response = await fetch(`${apiUrl}/get/socials/${handle}`);
       const data = await response.json();
       
       if (data.status === 'success') {
