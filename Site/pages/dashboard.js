@@ -22,13 +22,10 @@ const Dashboard = () => {
     // Check for token and fetch data
     const token = localStorage.getItem('LinkTreeToken');
     if (!token) {
-      toast.error('You must login to view the dashboard');
-      router.push('/login');
+      router.replace('/login');
       return;
     }
-    
     setToken(token);
-
     const fetchData = async () => {
       try {
         const response = await fetch('http://localhost:8080/data/dashboard', {
@@ -38,31 +35,25 @@ const Dashboard = () => {
           },
           body: JSON.stringify({ tokenMail: token }),
         });
-
         const data = await response.json();
-        console.log('Dashboard data:', data);
-
-        if (data.status === 'error') {
-          toast.error(data.error || 'Error loading dashboard');
+        if (data.status === 'error' || !data.userData) {
+          localStorage.removeItem('LinkTreeToken');
+          router.replace('/login');
           return;
         }
-
         if (data.status === 'Okay') {
           setUserData(data.userData);
           localStorage.setItem('userHandle', data.userData.handle);
-          
-          // Fetch additional user data
           await fetchLinks(data.userData.handle);
           await fetchSocialMedia(data.userData.handle);
         }
       } catch (error) {
-        console.error('Error fetching dashboard data:', error);
-        toast.error('Failed to load dashboard. Please try again.');
+        localStorage.removeItem('LinkTreeToken');
+        router.replace('/login');
       } finally {
         setLoading(false);
       }
     };
-
     fetchData();
   }, [router]);
   

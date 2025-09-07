@@ -1,8 +1,6 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const mongoose = require('mongoose');
-mongoose.set('strictQuery', false);
 const { registerUser, loginUser } = require('./controllers/auth');
 const {
   dashBoardData,
@@ -15,28 +13,48 @@ const {
 const {getUserData,getUserSocials} = require('./controllers/getUserData');
 require('dotenv').config();
 
-// Updated CORS configuration to work with deployed frontend
-app.use(cors({
-  origin: process.env.CORS_ORIGIN ? 
-    process.env.CORS_ORIGIN.split(',') : 
-    ['http://localhost:3000', 'https://linkfolio.vercel.app'],
-  credentials: true
-}));
+// Security and CORS configuration
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, Postman, etc.)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = process.env.CORS_ORIGIN ? 
+      process.env.CORS_ORIGIN.split(',').map(url => url.trim()) : 
+      ['http://localhost:3000', 'https://linkfolio.netlify.app'];
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  optionsSuccessStatus: 200
+};
 
-app.use(express.json());
+app.use(cors(corsOptions));
+app.use(express.json({ limit: '10mb' }));
 
-// Updated MongoDB connection to use environment variable for deployment flexibility
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/linkTree-9';
-mongoose.connect(MONGODB_URI)
-  .then(() => {
-    console.log('MongoDB Connected');
-  })
-  .catch(err => {
-    console.error('MongoDB connection error:', err);
-  });
+// Security headers
+app.use((req, res, next) => {
+  res.header('X-Content-Type-Options', 'nosniff');
+  res.header('X-Frame-Options', 'DENY');
+  res.header('X-XSS-Protection', '1; mode=block');
+  next();
+});
 
 app.get('/', (req, res) => {
-  res.send("LinkFolio API is running");
+  res.json({ 
+    message: "LinkFolio API is running",
+    version: "1.0.0",
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
 // Auth routes
@@ -55,8 +73,20 @@ app.post('/api/update-social-media', updateSocialMedia);
 app.get('/get/:handle', getUserData);
 app.get('/get/socials/:handle', getUserSocials);
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ status: 'error', error: 'Something went wrong!' });
+});
+
+// 404 handler
+app.use('*', (req, res) => {
+  res.status(404).json({ status: 'error', error: 'Route not found' });
+});
+
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });

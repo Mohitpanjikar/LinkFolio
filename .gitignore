@@ -14,6 +14,10 @@ node_modules
 **/.env
 **/.env.*
 !**/.env.example
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
 
 # logs
 **/logs
@@ -22,6 +26,7 @@ node_modules
 **/yarn-debug.log*
 **/yarn-error.log*
 **/.pnpm-debug.log*
+**/lerna-debug.log*
 
 # confidential files
 **/config/secrets.js
@@ -64,9 +69,13 @@ Thumbs.db
 /coverage
 **/.nyc_output
 
-# misc
-*.pem
-**/tmp/
+# deployment and hosting
 **/.vercel
 **/.turbo
-**/.cache/ 
+**/.cache/
+**/.netlify/
+**/netlify/
+
+# misc
+*.pem
+**/tmp/ 
