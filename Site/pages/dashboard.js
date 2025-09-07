@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
+import { API_ENDPOINTS } from '../utils/apiConfig';
 
 // Dashboard component with improved UI
 const Dashboard = () => {
@@ -28,7 +29,7 @@ const Dashboard = () => {
     setToken(token);
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8080/data/dashboard', {
+        const response = await fetch(API_ENDPOINTS.dashboard, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -59,8 +60,7 @@ const Dashboard = () => {
   
   const fetchLinks = async (handle) => {
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
-      const response = await fetch(`${apiUrl}/get/${handle}`);
+      const response = await fetch(API_ENDPOINTS.getUserData(handle));
       const data = await response.json();
       
       if (data.status === 'success') {
@@ -73,8 +73,7 @@ const Dashboard = () => {
   
   const fetchSocialMedia = async (handle) => {
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
-      const response = await fetch(`${apiUrl}/get/socials/${handle}`);
+      const response = await fetch(API_ENDPOINTS.getUserSocials(handle));
       const data = await response.json();
       
       if (data.status === 'success') {
@@ -88,7 +87,7 @@ const Dashboard = () => {
   // Profile update functionality
   const updateProfile = async (formData) => {
     try {
-      const response = await fetch('http://localhost:8080/api/update-profile', {
+      const response = await fetch(API_ENDPOINTS.updateProfile, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -122,7 +121,7 @@ const Dashboard = () => {
   // Link management functions
   const addLink = async (linkData) => {
     try {
-      const response = await fetch('http://localhost:8080/api/add-link', {
+      const response = await fetch(API_ENDPOINTS.addLink, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -152,7 +151,7 @@ const Dashboard = () => {
 
   const updateLink = async (linkId, linkData) => {
     try {
-      const response = await fetch('http://localhost:8080/api/update-link', {
+      const response = await fetch(API_ENDPOINTS.updateLink, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -183,7 +182,7 @@ const Dashboard = () => {
 
   const deleteLink = async (linkId) => {
     try {
-      const response = await fetch('http://localhost:8080/api/delete-link', {
+      const response = await fetch(API_ENDPOINTS.deleteLink, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -214,7 +213,7 @@ const Dashboard = () => {
   // Social media management
   const updateSocialMedia = async (socialMediaData) => {
     try {
-      const response = await fetch('http://localhost:8080/api/update-social-media', {
+      const response = await fetch(API_ENDPOINTS.updateSocialMedia, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

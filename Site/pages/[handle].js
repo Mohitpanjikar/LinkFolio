@@ -4,6 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
 import Head from 'next/head';
+import { API_ENDPOINTS } from '../utils/apiConfig';
 
 // Platform icon mapping
 const platformIcons = {
@@ -95,7 +96,7 @@ const Handle = () => {
   useEffect(() => {
     if (router.query?.handle) {
       // Fetch user data
-      fetch(`http://localhost:8080/get/${router.query.handle}`)
+      fetch(API_ENDPOINTS.getUserData(router.query.handle))
         .then(res => res.json())
         .then(data => {
           if (data.status === 'error') {
@@ -112,7 +113,7 @@ const Handle = () => {
         });
 
       // Fetch social media data
-      fetch(`http://localhost:8080/get/socials/${router.query.handle}`)
+      fetch(API_ENDPOINTS.getUserSocials(router.query.handle))
         .then(res => res.json())
         .then(data => {
           if (data.status === 'error') {

@@ -22,25 +22,30 @@ const Login = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email,
+        email: email.toLowerCase().trim(),
         password
       })
     })
       .then(res => res.json())
       .then(data => {
+        console.log('Login response:', data); // Debug log
         if (data.status === 'success') {
-          toast('You are logged in');
+          toast.success('You are logged in');
           localStorage.setItem('LinkTreeToken', data.token);
-          router.push('/dashboard');
-          // You can redirect or perform additional actions here if needed
+          // Force navigation with a small delay to ensure storage is set
+          setTimeout(() => {
+            router.push('/dashboard');
+          }, 100);
         } else if (data.status === 'not found') {
           toast.error('User not found');
         } else if (data.status === 'error') {
           toast.error(data.error || 'Invalid credentials');
+        } else {
+          toast.error('Login failed. Please try again.');
         }
       })
       .catch(err => {
-        console.log(err);
+        console.error('Login error:', err);
         toast.error('An error occurred while logging in');
       })
   }
